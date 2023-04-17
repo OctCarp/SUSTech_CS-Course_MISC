@@ -1,6 +1,7 @@
 .data
-    filename: .space 100
-    buffer: .space 400000
+	filename: .space 100
+	buffer: .space 400000
+
 .text
 main:
 	#read filename
@@ -15,22 +16,20 @@ main:
 	li $a1, 0 # 0 for read
 	li $a2, 0
 	syscall
-	move $s6, $v0 # save file descriptor
+	move $s6, $v0  # save file descriptor
 
 	# read file
 	li $v0,14
-	move $a0,$s6 # load file descriptor
-	la $a1, buffer # save read content to buffer space
-	li $a2, 40 # reads 40 ascii chars
+	move $a0,$s6  # load file descriptor
+	la $a1, buffer  # save read content to buffer space
+	li $a2, 40  # reads 40 ascii chars
 	syscall
 
-	
-    	# close file
-    	li $v0,16
-    	move $a0, $s6 # load file descriptor
-    	syscall
+	# close file
+	li $v0, 16
+	move $a0, $s6 # load file descriptor
+	syscall
 
-	
 	addi $t0, $a1, 0
 	li $t7, 0
 	
@@ -50,7 +49,7 @@ method_end:
 	addi $t9, $t9, 1
 	j method_loop
 
-read: 
+read:
 	li $t1, 0
 	li $t6, 0
 loop:
@@ -63,9 +62,9 @@ loop:
 	beq $t5, 0, char
 	addi $t2, $t2, -48
 	j calc
-char:	
+char:
 	addi $t2, $t2, -87
-calc:	
+calc:
 	add $t6, $t6, $t2
 	addi $t1, $t1, 1
 	addi $t0, $t0, 1

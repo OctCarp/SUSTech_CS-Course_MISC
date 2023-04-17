@@ -1,16 +1,17 @@
 .data
-    str: .space 100
+	str: .space 100
+
 .text
 main:
-	li $v0,8 #to get a string
-    la $a0,str
-    li $a1,100
-    syscall
+	li $v0, 8  #to get a string
+	la $a0, str
+	li $a1, 100
+	syscall
 	
-	addi $t0, $a0, 0 #addr
-	li $t7, 0 #bits_num
-	li $t6, 0 #1_num
-	 #bit
+	addi $t0, $a0, 0  #addr
+	li $t7, 0  #bits_num
+	li $t6, 0  #1_num
+	#bit
 loop:
 	lb $t1, 0($t0)
 	slti $t3, $t1, 47

@@ -1,27 +1,28 @@
 .data
-    in: .space 10000
-    bin: .space 100000
-    
-    yes: .asciiz " is a binary palindrome"
-    no: .asciiz " is not a binary palindrome"
-    ascode: .asciiz "the ASCII code is "
-    binary: .asciiz "the binary code is "
+	in: .space 10000
+	bin: .space 100000
+
+	yes: .asciiz " is a binary palindrome"
+	no: .asciiz " is not a binary palindrome"
+	ascode: .asciiz "the ASCII code is "
+	binary: .asciiz "the binary code is "
+
 .text
 main:
-	li $v0,8 #to get a string
+	li $v0, 8 #to get a string
 	la $a0, in
-	li $a1,100
+	li $a1, 100
 	syscall
 
-    	la $s1, in
-    	la $s2, bin
-    	li $v0, 11
-    	
-    	addi $t0, $s1, 0 #byte in pointer
-    	addi $t1, $s2, 0 #byte out pointer
-    	lb $t2, 0($t0)
-    	jal convert
-    	addi $t0, $t0, 1
+	la $s1, in
+	la $s2, bin
+	li $v0, 11
+
+	addi $t0, $s1, 0 #byte in pointer
+	addi $t1, $s2, 0 #byte out pointer
+	lb $t2, 0($t0)
+	jal convert
+	addi $t0, $t0, 1
 
 loop:
 	lb $t2, 0($t0) #current ascii
@@ -65,7 +66,7 @@ check_loop:
 	addi $t1, $t1, -1
 	lb $t2, 0($t0)
 	lb $t3, 0($t1)
-	bne 	$t2, $t3, check_fail
+	bne $t2, $t3, check_fail
 	addi $t4, $t1, -1
 	beq $t4, $t0, check_success
 	beq $t1, $t0, check_success
@@ -108,7 +109,7 @@ ccl_loop:
 	
 	addi $t0, $t0, 1
 	j ccl_loop
-ccl_loop_exit:	
+ccl_loop_exit:
 	li $v0, 11
 	li $a0, 10
 	syscall
@@ -118,4 +119,3 @@ ccl_loop_exit:
 	syscall
 	la $a0, bin
 	syscall
-	
